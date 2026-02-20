@@ -1,0 +1,10 @@
+include README.md
+include cadscorelt.h
+include cadscorelt_python_wrap.cxx
+include cadscorelt/__init__.py
+include cadscorelt/cadscorelt_python.py
+include cadscorelt/pandas_interface.py
+include cadscorelt/biotite_interface.py
+include cadscorelt/gemmi_interface.py
+include cadscorelt/biopython_interface.py
+recursive-include cpp *

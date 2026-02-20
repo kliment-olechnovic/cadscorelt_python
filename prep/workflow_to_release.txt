@@ -1,0 +1,17 @@
+1) run ./prep/sync_with_the_main_repository.bash
+
+2) run ./prep/run_swig_and_compile_binary.bash
+
+3) do git commit + push
+
+4) run GitHub action to produce wheels
+
+5) download the produced wheels .zip files to ./dist
+
+6) if needed, run ./prep/setup_python_venv.bash
+
+7) run ./prep/run_python_build_and_twine.bash
+
+8) if twine was not executed from ./prep/run_python_build_and_twine.bash, execute it manually from the terminal
+
+9) run ./tests/run_all_tests.bash
