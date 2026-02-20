@@ -1,10 +1,13 @@
 import sys
 from setuptools import setup, Extension, find_packages
 
-extra_compile_args = ["-O3"]
-if sys.platform.startswith("linux") or sys.platform == "darwin":
-    extra_compile_args.append("-fPIC")
-    extra_compile_args.append("-std=c++17")
+extra_compile_args = []
+if sys.platform.startswith("win"):
+    extra_compile_args = ["/O2", "/std:c++17"]
+else:
+    extra_compile_args = ["-O3", "-std=c++17"]
+    if sys.platform.startswith("linux") or sys.platform == "darwin":
+        extra_compile_args.append("-fPIC")
 
 cadscorelt_module = Extension(
     name="cadscorelt._cadscorelt_python",
