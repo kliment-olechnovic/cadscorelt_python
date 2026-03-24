@@ -5,7 +5,7 @@ from pathlib import Path
 cadscorelt.enable_considering_residue_names()
 
 # init a CAD-score computation object, enable atom-atom contact scoring, enable automatic chain remapping to maximize grobal similarity, enable recording local scores
-csc = cadscorelt.CADScoreComputer.init(subselect_contacts="[-inter-chain]", score_atom_atom_contacts=True, remap_chains=True, record_local_scores=True)
+csc = cadscorelt.CADScoreComputer.init(subselect_contacts="[-inter-chain]", score_atom_atom_contacts=True, remap_chains=True, record_local_scores=True, calculate_identities=True)
 
 # set reference sequences and stoichiometry for automatic residue renumbering and chain namne assignment
 csc.set_reference_sequences_from_file("./input/data/protein_heteromer1/sequences.fasta")
@@ -23,6 +23,14 @@ print("")
 print(" # Table of structure decriptors:")
 print("")
 cadscorelt.print_head_of_pandas_data_frame(df_structure_descriptors)
+print("")
+
+# get the table of identity decriptors and print its top rows
+df_identity_descriptors = csc.get_all_identity_descriptors().to_pandas()
+print("")
+print(" # Table of identity descriptors:")
+print("")
+cadscorelt.print_head_of_pandas_data_frame(df_identity_descriptors)
 print("")
 
 # get the table of globals scores based on residue-residue contacts, print top rows
@@ -56,7 +64,7 @@ print("")
 # get the table of scores for every residue-residue contact, print top rows
 df_local_scores_residue_residue = csc.get_local_cadscores_residue_residue(target_name, model_name).to_pandas()
 print("")
-print(" # Table of scores for every residue-residue contact (CAD-score values of -1 idicate that the contact was not present in the target structure):")
+print(" # Table of scores for every residue-residue contact (CAD-score values of -1 indicate that the contact was not present in the target structure):")
 print("")
 cadscorelt.print_head_of_pandas_data_frame(df_local_scores_residue_residue)
 print("")
@@ -64,7 +72,7 @@ print("")
 # get the table of per-atom scores based on atom-atom contacts, print top rows
 df_local_scores_per_atom = csc.get_local_cadscores_atom_atom_summarized_per_atom(target_name, model_name).to_pandas()
 print("")
-print(" # Table of per-atom scores based on atom-atom contacts (CAD-score values of -1 idicate that the atom had no relevant contacts in the target structure):")
+print(" # Table of per-atom scores based on atom-atom contacts (CAD-score values of -1 indicate that the atom had no relevant contacts in the target structure):")
 print("")
 cadscorelt.print_head_of_pandas_data_frame(df_local_scores_per_atom)
 print("")
@@ -72,7 +80,7 @@ print("")
 # get the table of scores for every atom-atom contact, print top rows
 df_local_scores_atom_atom = csc.get_local_cadscores_atom_atom(target_name, model_name).to_pandas()
 print("")
-print(" # Table of scores for every atom-atom contact (CAD-score values of -1 idicate that the contact was not present in the target structure):")
+print(" # Table of scores for every atom-atom contact (CAD-score values of -1 indicate that the contact was not present in the target structure):")
 print("")
 cadscorelt.print_head_of_pandas_data_frame(df_local_scores_atom_atom)
 print("")
