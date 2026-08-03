@@ -19,7 +19,7 @@ cadscorelt_module = Extension(
 
 setup(
     name="cadscorelt",
-    version="0.9.159",
+    version="0.9.193",
     description="CAD-score-LT Python bindings via SWIG",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
